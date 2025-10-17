@@ -1,0 +1,23 @@
+#
+# Goodix GT9xx Touchscreen driver
+#
+config HIS_TOUCHSCREEN_GOODIX_GESTURE
+	tristate "Goodix touchpanel for gesture"
+	depends on HIS_TOUCHSCREEN_GOODIX
+	default n
+	help
+	  This is application debug interface support for Goodix GT9xx
+	  touchscreens.
+
+	  Say Y here if you want to have a Android app debug interface
+	  to your system.
+
+	  If unsure, say N.
+config HIS_TOUCHSCREEN_GOODIX_AUTO_UPDATE
+	bool "Goodix touchpanel auto update "
+	depends on HIS_TOUCHSCREEN_GOODIX
+	default n
+	help
+		Say Y here to enable Touchscreen factory test functions.
+		
+		If unsure, say N.

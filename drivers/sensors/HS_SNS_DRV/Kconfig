@@ -1,0 +1,118 @@
+#
+# hisense sensors device configuration
+#
+
+menu "Hisense sensors device support"
+	depends on SENSORS
+
+config HS_SNS_ACC
+	bool "Provide Accelerometer Device Support"
+	default n
+	depends on SENSORS
+	help
+	  Say Y here, a list of availible accelerometer chips shall be shown.
+	  Then you can select one or more chip for one project.
+	
+if HS_SNS_ACC
+
+config HS_SNS_BMA2X2
+	bool "Bosch bma2x2 serial Acc chips"
+	default n
+	help
+	 Say y here if you want to use Bosch bma2x2 acc chip.
+
+config HS_SNS_KXTJ9
+	bool "Kionix kxt* serial Acc chips"
+	default n
+	help
+	 Say y here if you want to use Kionix kxtj9 kxtj2 kxtik1004 acc chips.
+
+config HS_SNS_MC3XXX
+	bool "mCube mc3xxx serial Acc chips"
+	default n
+	help
+	 Say y here if you want to use mCube mc3xxx serial acc chips.
+
+endif
+
+config HS_SNS_MAG
+	bool "Provide Magnetic Device Support"
+	default n
+	depends on HS_SNS_ACC
+	help
+	  Say Y here, a list of availible Magnetic chips shall be shown.
+	  Then you can select one or more chip for one project.
+	
+if HS_SNS_MAG
+
+config HS_SNS_AKM09911
+	bool "AKM akm09911 Mag chips"
+	default n
+	help
+	 Say y here if you want to use AKM akm09911 Mag chips.
+
+config HS_SNS_AKM09916
+	bool "AKM akm09916 Mag chips"
+	default n
+	help
+	 Say y here if you want to use AKM akm09916 Mag chips.
+
+config HS_SNS_ST480
+	bool "SENODIA st480 Mag chips"
+	default n
+	help
+	 Say y here if you want to use SENODIA st480 Mag chips.
+
+endif
+
+config HS_SNS_GYRO
+	bool "Provide Gyroscope Device Support"
+	default n
+	depends on HS_SNS_ACC
+	help
+	  Say Y here, a list of availible Gyroscope chips shall be shown.
+	  Then you can select one or more chip for one project.
+	
+if HS_SNS_GYRO
+
+config HS_SNS_MPU3050
+	bool "InvenSense MPU3050 Gyro chips"
+	default n
+	depends on !HS_SNS_MPU6050
+	help
+	 Say y here if you want to use InvenSense MPU3050 serial Gyro chips.
+
+comment "MPU6050 is a Acc + Gyro combo chip, so not need to say y here while it seleted in Acc"
+
+endif
+
+config HS_SNS_ALSPS
+	bool "Provide Ambient Light and/or Proximity Device Support"
+	default n
+	depends on SENSORS
+	help
+	  Say Y here, a list of availible Ambient Light and/or Proximity chips shall be shown.
+	  Then you can select only one chip for one project.
+	
+if HS_SNS_ALSPS
+
+config HS_SNS_APDS993X
+	bool "Avago apds993x alsps chips"
+	help
+	 Say y here if you want to use Avago apds993x alsps chips.
+
+config HS_SNS_CM36686
+	bool "Capella cm36686 alsps chips"
+	help
+	 Say y here if you want to use Capella cm36686 alsps chips.
+
+config HS_SNS_ELAN_ALSPS
+	bool "Elan epl2590/epl88055 alsps chips"
+	default n
+	help
+	 Say y here if you want to use Elan epl2590/epl88055 alsps chips.
+
+
+endif
+
+endmenu
