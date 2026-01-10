@@ -4,20 +4,22 @@
 DEFCONFIG=l760_defconfig
 
 if [ "$1"z = "user"z ]; then
-	echo -e "\n\n\t\t===== Build release kernel =====\n\n"
+	echo -e "\n\n\t\t===== Compilation du noyau de production =====\n\n"
 	DEFCONFIG=l760_release_defconfig
 else
-	echo -e "\n\n\t\t===== Build debug kernel =====\n\n"
+	echo -e "\n\n\t\t===== Compilation du noyau de déboggage =====\n\n"
 fi
-
+echo "Initialisation...."
 OUTDIR=kout
 TARGET_ARCH=arm
 PATH=`pwd`/toolchain/arm-eabi-4.8/bin:$PATH
 CROSS_COMPILER=arm-eabi-
 
-NR_CPU=$(cat /proc/cpuinfo | grep ^processor | wc -l)
+NR_CPU=$(nproc)
 
 mkdir -p $OUTDIR
+echo "Make..."
+sleep 1
 make O=$OUTDIR ARCH=$TARGET_ARCH $DEFCONFIG
 
 if [ "$1"z = "check"z ]; then
@@ -31,4 +33,4 @@ else
 
 	. ./scripts/mkbootimg.sh $OUTDIR $TARGET_ARCH
 fi
-
+echo "Compilation terminée ! L'image boot.img se trouve dans kout/boot.img ."
